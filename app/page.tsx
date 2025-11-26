@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DiagramCanvas from "@/components/DiagramCanvas";
 import InputForm from "@/components/InputForm";
 import AIAnalysis from "@/components/AIAnalysis";
@@ -11,6 +11,16 @@ export default function Home() {
   const [diagramData, setDiagramData] = useState<any>(null);
   const [analysis, setAnalysis] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+
+  useEffect(() => {
+    // Tampilkan notifikasi saat pertama kali web dibuka
+    const hasSeenNotification = sessionStorage.getItem("hasSeenNotification");
+    if (!hasSeenNotification) {
+      setShowNotification(true);
+      sessionStorage.setItem("hasSeenNotification", "true");
+    }
+  }, []);
 
   const handleGenerate = async () => {
     if (!programName || !flowDescription) {
@@ -39,6 +49,45 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-3 sm:p-6 md:p-8">
+      {/* Notification Modal */}
+      {showNotification && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-2xl max-w-md w-full p-6 relative animate-fade-in">
+            <button
+              onClick={() => setShowNotification(false)}
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl font-bold"
+            >
+              ×
+            </button>
+            <div className="mb-4">
+              <h2 className="text-xl font-bold text-indigo-900 mb-3">
+                Selamat Datang! 👋
+              </h2>
+              <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                Web ini dibuat untuk mencari tahu dan membantu mengetahui apakah sistem automata DFA atau NFA beserta kelemahannya.
+              </p>
+              <div className="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded">
+                <p className="text-sm text-gray-800 mb-2">
+                  <strong>Jasa Tersedia:</strong>
+                </p>
+                <p className="text-sm text-gray-700 mb-2">
+                  Jika berminat untuk joki project dan skripsi atau butuh jasa pengiriman pribadi, hubungi:
+                </p>
+                <p className="text-indigo-700 font-semibold text-base">
+                  📱 085643025633 - King Wisnu
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowNotification(false)}
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded transition-colors"
+            >
+              Mengerti
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto">
         {/* Header - Mobile Optimized */}
         <div className="mb-4 sm:mb-6 md:mb-8">
