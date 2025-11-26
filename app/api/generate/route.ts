@@ -74,7 +74,7 @@ Berikan response dalam format JSON PERSIS seperti ini:
     const text = response.text;
 
     // Extract JSON from response and clean control characters
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    const jsonMatch = text?.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       throw new Error("Invalid response format");
     }
