@@ -1,0 +1,1 @@
+buat kan aku sebuah web dengan next js, web ini punya fungsi untuk membuat sebuah diagram automata yang lengkap dengan penjelasan yang interaktif . dengan inputan nama program nya seperti apa dan alur nya seperti apa web nya akan generate sebuah diagram, tambahkan ai untuk proses analisis lebih baik. ini api key gemini gratis ku: AIzaSyALGvGVO_sLby-yIZDeta6pP2XKDuCCyzw
